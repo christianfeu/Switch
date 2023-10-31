@@ -1,9 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import CadastrarUsuario from './components/Cadastrar/CadastrarUsuario';
+import LoginUsuario from './components/Login/LoginUsuario';
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer} from '@react-navigation/native';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <CadastrarUsuario/>
+    <>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={LoginUsuario} />
+        
+      </Stack.Navigator>
+    </NavigationContainer>
+    </>
+
   );
 }

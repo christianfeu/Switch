@@ -1,12 +1,15 @@
 import React from 'react';
-import {SafeAreaView, StyleSheetclear} from 'react-native';
 import { TextInput } from 'react-native-paper';
+
+const MyComponent = () => {
+    const [text, setText] = React.useState("");
+}
 
 export default function CadastrarUsuario(){
     return(
-        <TouchableWithoutFeedback onPress={ () => Keyboard.dismiss() } >
+        <div>
             
-        </TouchableWithoutFeedback>
+        </div>      
     );
 }
 
