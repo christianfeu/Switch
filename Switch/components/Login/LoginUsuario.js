@@ -9,7 +9,7 @@ export default function LoginUsuario(){
     const [senha, setSenha]= useState('');
 
     function logar(){
-        var loginObj = {emial: email, senha: senha};
+        var loginObj = {email: email, senha: senha};
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -29,69 +29,79 @@ export default function LoginUsuario(){
         .catch(error => console.log('error', error));
     }
 
-    const styles = StyleSheet.create({
-        forgotPassword: {
-          width: '100%',
-          alignItems: 'flex-end',
-          marginBottom: 24,
-        },
-
-        row: {
-          flexDirection: 'row',
-          marginTop: 4,
-        },
-
-        container: {
-            width: '100%',
-            marginVertical: 10,
-            paddingHorizontal: 4,
-            paddingTop: 50,
-        },
-
-        input: {
-            marginVertical: 10,    
-        },
-
-      });
-
     return(
-        <>
     <View style={styles.container}>
-            <TextInput
-        label="Email"
-        value={email}
-        onChangeText={email => setEmail(email)}
-        />
+      <Text style={styles.header}>Bem Vindo ao</Text>
+      <Text style={styles.header}>Switch</Text>
 
-        <TextInput style={styles.input}
-        label="Senha"
-        value={senha}
-        onChangeText={senha => setSenha(senha)}
-        />
+      <View style={styles.container}>
+          <TextInput style={styles.input}
+          label="Email"
+          value={email}
+          onChangeText={email => setEmail(email)}
+          />
 
-        <View style={styles.forgotPassword}>
-        <TouchableOpacity
+          <TextInput style={styles.input}
+          label="Senha"
+          value={senha}
+          onChangeText={senha => setSenha(senha)}
+          />
 
-        >
-          <Text style={styles.label}>Esqueceu sua senha ?</Text>
-        </TouchableOpacity>
+          <View style={styles.forgotPassword}>
+            <TouchableOpacity
+            >
+              <Text style={styles.label}>Esqueceu sua senha ?</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity >
+            <Button mode="contained" onPress={() => console.log('Pressed')}>
+                Login
+            </Button>
+          </TouchableOpacity>
+
+          <View style={styles.row}>
+            <Text style={styles.label}>Primeira vez no Switch? </Text>
+              <TouchableOpacity>
+                <Text style={styles.link}>Cadastrar</Text>
+              </TouchableOpacity>
         </View>
-
-        <TouchableOpacity >
-        <Button mode="contained" onPress={() => console.log('Pressed')}>
-            Login
-        </Button>
-        </TouchableOpacity>
-
-        <View style={styles.row}>
-        <Text style={styles.label}>Não tem conta? </Text>
-        <TouchableOpacity>
-          <Text style={styles.link}>Cadastrar</Text>
-        </TouchableOpacity>
       </View>
-    </View>
         
-        </>
+    </View>
 
     );
 }
+
+const styles = StyleSheet.create({
+  
+  forgotPassword: {
+    width: '100%',
+    alignItems: 'flex-end',
+    marginBottom: 24,
+  },
+
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignSelf: 'center',
+    width: 'auto',
+    minWidth: 50,
+  },
+
+  input: {
+    marginVertical: 10,   
+  },
+
+  header: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    paddingVertical: 14,
+  },
+
+});
