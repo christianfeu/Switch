@@ -2,8 +2,9 @@ import React from "react";
 import {useState} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
+import CadastrarUsuario from "../Cadastrar/CadastrarUsuario";
 
-export default function LoginUsuario(){
+export default function LoginUsuario({navigation}){
 
     const [email, setEmail]= useState('');
     const [senha, setSenha]= useState('');
@@ -11,9 +12,7 @@ export default function LoginUsuario(){
     function logar(){
         var loginObj = {email: email, senha: senha};
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
+        var myHeaders = {"Content-Type": "application/json"};
         var raw = JSON.stringify(loginObj);
 
         var requestOptions = {
@@ -24,9 +23,15 @@ export default function LoginUsuario(){
         };
 
         fetch("https://switch-app.glitch.me//login", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
+        .then(response => response.json())
+        .then(result => {
+          if(result.menssagem == "sucesso!"){
+            navigation.navigate("Menu");
+          }
+
+        })
         .catch(error => console.log('error', error));
+      
     }
 
     return(
@@ -55,14 +60,14 @@ export default function LoginUsuario(){
           </View>
 
           <TouchableOpacity >
-            <Button mode="contained" onPress={() => console.log('Pressed')}>
+            <Button mode="contained" onPress={logar}>
                 Login
             </Button>
           </TouchableOpacity>
 
           <View style={styles.row}>
             <Text style={styles.label}>Primeira vez no Switch? </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>{navigation.navigate("Registrar")}}>
                 <Text style={styles.link}>Cadastrar</Text>
               </TouchableOpacity>
         </View>

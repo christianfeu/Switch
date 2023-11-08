@@ -4,7 +4,7 @@ import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 
 
-export default function CadastrarUsuario(){
+export default function CadastrarUsuario({navigation}){
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -17,7 +17,7 @@ export default function CadastrarUsuario(){
           var userObj = { nome: nome, email: email, senha: senha };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
-          fetch('https://api-mysql.glitch.me/usuarios', {
+          fetch('https://switch-app.glitch.me//usuario', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export default function CadastrarUsuario(){
           })
             .then((response) => response.json())
             .then((json) => {
-              console.log(json);
+              navigation.navigate("Login");
             })
             .catch((err) => {
               console.log(err);
@@ -40,15 +40,17 @@ export default function CadastrarUsuario(){
     return(
     <View style={styles.container}>
 
-      <TextInput
-          label="Name"
-          value={nome.value}
+      <Text style={styles.header}>Cadastrar</Text>
+
+      <TextInput style={styles.input}
+          label="Nome"
+          value={nome}
           onChangeText={(event) => setNome(event)}
       />
 
-      <TextInput
+      <TextInput style={styles.input}
         label="Email"
-        value={email.value}
+        value={email}
         onChangeText={(event) => setEmail(event)}
         autoCapitalize="none"
         autoCompleteType="email"
@@ -56,26 +58,24 @@ export default function CadastrarUsuario(){
         keyboardType="email-address"
       />
 
-      <TextInput
+      <TextInput style={styles.input}
         label="Password"
-        value={password.value}
         onChangeText={(event) => setSenha(event)}
         secureTextEntry
       />
-      <TextInput
+      <TextInput style={styles.input}
         label="Password"
-        value={password.value}
         onChangeText={(event) => setSenhaConfirma(event)}
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={_onSignUpPressed} style={styles.button}>
+      <Button mode="contained" onPress={Registrar} style={styles.button}>
         Cadastrar
       </Button>
 
       <View style={styles.row}>
         <Text style={styles.label}>Ja tem conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>    
@@ -104,6 +104,12 @@ const styles = StyleSheet.create({
     },
     input: {
       marginVertical: 10,   
+    },
+
+    header: {
+      fontSize: 26,
+      fontWeight: 'bold',
+      paddingVertical: 14,
     },
   });
 
