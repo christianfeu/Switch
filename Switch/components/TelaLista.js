@@ -47,6 +47,20 @@ export function TelaLista({navigation}) {
     );
   };
 
+  function deletar(idUsuario){
+    console.log(idUsuario);
+
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+    
+    fetch("https://switch-app.glitch.me//usuario/"+idUsuario, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
   const renderItemComponent = ({ item }) => (
     <View style={styles.listItem}>
       <View style={{ alignItems: "center", flex: 1 }}>
@@ -55,13 +69,19 @@ export function TelaLista({navigation}) {
       </View>
       <TouchableOpacity
         style={{ height: 50, width: 50, justifyContent: "center", alignItems: "center" }}
-        onPress={() => { confirmar() }}
+        onPress={() => { 
+          navigation.navigate('Editar',{
+            idUsuario: item.idUsuario,
+          });
+         }}
       >
         <Text style={{ color: "green" }}>Editar</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{ height: 50, width: 50, justifyContent: "center", alignItems: "center" }}
-        onPress={() => { confirmar() }}
+        onPress={() => { 
+          deletar(item.idUsuario);
+         }}
       >
         <Text style={{ color: "red" }}>Excluir</Text>
       </TouchableOpacity>
