@@ -4,7 +4,7 @@ import { Image, StyleSheet,Text, View } from 'react-native';
 export default function Logo(){
     return(
         <View style={styles.logo}>
-            <Image source={require('../assets/logo.png')} style={styles.image} />
+            <Image source={require('../../assets/logo.png')} style={styles.image} />
             <Text style={styles.font}>Switch</Text>
         </View>
     );

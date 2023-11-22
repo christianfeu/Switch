@@ -1,9 +1,9 @@
-import CadastrarUsuario from './components/Cadastrar/CadastrarUsuario';
-import LoginUsuario from './components/Login/LoginUsuario';
-import {TelaMenu} from './components/TelaMenu';
+import CadastrarUsuario from './src/pages/Cadastrar/CadastrarUsuario';
+import LoginUsuario from './src/pages/Login/LoginUsuario';
+import {TelaMenu} from './src/pages/TelaMenu';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
-import TelaEditar from './components/TelaEditar';
+import TelaEditar from './src/pages/TelaEditar';
 import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();

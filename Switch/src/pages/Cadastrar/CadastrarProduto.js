@@ -10,6 +10,7 @@ export default function CadastrarProduto({navigation}){
     const [preco, setPreco] = useState('');
     const [desc, setDesc] = useState('');
     const [categoria, setCategoria] = useState('');
+    //const idUsuario=
 
 
     const [open, setOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function CadastrarProduto({navigation}){
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc };
+          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc,usuario:3 };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
           fetch('https://switch-app.glitch.me//produto', {

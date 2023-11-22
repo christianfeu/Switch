@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
-import Logo from "../Logo";
+import Logo from "../../components/Logo";
 
 export default function LoginUsuario({navigation}){
 
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    backgroundColor: 'white',
     flex: 1,
     marginTop: 40,
     padding: 20,
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
+    marginTop: 40,
     alignItems: 'center',
     justifyContent: 'center'
   },
