@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
-import CadastrarUsuario from "../Cadastrar/CadastrarUsuario";
+import Logo from "../Logo";
 
 export default function LoginUsuario({navigation}){
 
@@ -36,41 +36,51 @@ export default function LoginUsuario({navigation}){
 
     return(
     <View style={styles.container}>
-      <Text style={styles.header}>Bem Vindo ao</Text>
-      <Text style={styles.header}>Switch</Text>
+
+      <View style={styles.logo}>
+        <Text style={styles.font}>Bem Vindo ao</Text>
+        <Logo/>
+      </View>
 
       <View style={styles.container}>
           <TextInput style={styles.input}
           label="Email"
+          mode='outlined'
+          selectionColor='red'
+          underlineColor='red'
           value={email}
           onChangeText={email => setEmail(email)}
           />
 
           <TextInput style={styles.input}
           label="Senha"
+          mode='outlined'
           value={senha}
           onChangeText={senha => setSenha(senha)}
           />
 
-          <View style={styles.forgotPassword}>
-            <TouchableOpacity
-            >
-              <Text style={styles.label}>Esqueceu sua senha ?</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity >
-            <Button mode="contained" onPress={logar}>
-                Login
-            </Button>
-          </TouchableOpacity>
-
           <View style={styles.row}>
             <Text style={styles.label}>Primeira vez no Switch? </Text>
               <TouchableOpacity onPress={()=>{navigation.navigate("Registrar")}}>
-                <Text style={styles.link}>Cadastrar</Text>
+                <Text style={styles.link}>Cadastrar.</Text>
               </TouchableOpacity>
-        </View>
+          </View>
+
+          <TouchableOpacity >
+            <Button 
+            mode="contained" 
+            onPress={logar}>
+            Login
+            </Button>
+          </TouchableOpacity>
+
+          <View style={styles.forgotPassword}>
+            <TouchableOpacity
+            >
+              <Text style={styles.label}>Esqueceu sua senha?</Text>
+            </TouchableOpacity>
+          </View>
+
       </View>
         
     </View>
@@ -82,31 +92,41 @@ const styles = StyleSheet.create({
   
   forgotPassword: {
     width: '100%',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    marginTop: 10,
     marginBottom: 24,
   },
 
   row: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 10,
+    marginBottom: 24,
+    justifyContent: 'center'
+
   },
 
   container: {
     flex: 1,
-    flexDirection: 'column',
-    alignSelf: 'center',
-    width: 'auto',
-    minWidth: 50,
+    marginTop: 40,
+    padding: 20,
   },
 
   input: {
     marginVertical: 10,   
   },
 
-  header: {
-    fontSize: 26,
+  link: {
     fontWeight: 'bold',
-    paddingVertical: 14,
+  },
+
+  font: {
+    fontSize: 26,
+    fontWeight:'bold',
+  },
+
+  logo: {
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
 });

@@ -4,6 +4,7 @@ import {TelaMenu} from './components/TelaMenu';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
 import TelaEditar from './components/TelaEditar';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
 

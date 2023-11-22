@@ -2,22 +2,30 @@ import React from 'react';
 import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 
-export default function CadastrarUsuario({navigation}){
+export default function CadastrarProduto({navigation}){
     const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
-    const [senhaConfirma, setSenhaConfirma] = useState('');
+    const [preco, setPreco] = useState('');
+    const [desc, setDesc] = useState('');
+    const [categoria, setCategoria] = useState('');
+
+
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [categ, setCateg] = useState([
+      {label: 'Camisa', value: '1'},
+      {label: 'Tenis', value: '2'}
+    ]);
 
     function Registrar() {
     
-        if (senha == senhaConfirma) {
           console.log('Ok');
-          var userObj = { nome: nome, email: email, senha: senha };
+          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
-          fetch('https://switch-app.glitch.me//usuario', {
+          fetch('https://switch-app.glitch.me//produto', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -27,20 +35,18 @@ export default function CadastrarUsuario({navigation}){
           })
             .then((response) => response.json())
             .then((json) => {
-              navigation.navigate("Login");
+              console.log('registrado');
             })
             .catch((err) => {
               console.log(err);
             });
-        } else {
-          alert('Senhas diferentes!');
-        }
+
     }
 
     return(
     <View style={styles.container}>
 
-      <Text style={styles.header}>Cadastrar</Text>
+      <Text style={styles.header}>Cadastrar Produto</Text>
 
       <TextInput style={styles.input}
           label="Nome"
@@ -50,39 +56,33 @@ export default function CadastrarUsuario({navigation}){
       />
 
       <TextInput style={styles.input}
-        label="Email"
-        value={email}
-        mode='outlined'
-        onChangeText={(event) => setEmail(event)}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+          label="Preço"
+          value={preco}
+          mode='outlined'
+          onChangeText={(event) => setPreco(event)}
       />
 
       <TextInput style={styles.input}
-        label="Password"
-        mode='outlined'
-        onChangeText={(event) => setSenha(event)}
-        secureTextEntry
-      />
-      <TextInput style={styles.input}
-        label="Password"
-        mode='outlined'
-        onChangeText={(event) => setSenhaConfirma(event)}
-        secureTextEntry
+          label="Descrição"
+          value={desc}
+          mode='outlined'
+          onChangeText={(event) => setDesc(event)}
       />
 
+      {/* <DropDownPicker style={styles.input}
+          open={open}
+          value={value}
+          items={categ}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setCateg}
+      /> */}
+
+      
       <Button mode="contained" onPress={Registrar} style={styles.button}>
         Cadastrar
       </Button>
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Ja tem conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>    
+   
     </View>     
     );
  

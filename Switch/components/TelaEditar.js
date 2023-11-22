@@ -14,6 +14,7 @@ export default function TelaEditar({navigation,route}){
     useEffect(()=>{
         async function fetchItem(){
             fetch("https://switch-app.glitch.me//usuarios/"+idUsuario,{
+                method: 'GET',
                 headers:{
                     'Content-Type': 'application/json'
                 }
@@ -68,12 +69,14 @@ export default function TelaEditar({navigation,route}){
       <TextInput style={styles.input}
           label="Nome"
           value={nome}
+          mode='outlined'
           onChangeText={(event) => setNome(event)}
       />
 
       <TextInput style={styles.input}
         label="Email"
         value={email}
+        mode='outlined'
         onChangeText={(event) => setEmail(event)}
         autoCapitalize="none"
         autoCompleteType="email"
@@ -84,12 +87,14 @@ export default function TelaEditar({navigation,route}){
       <TextInput style={styles.input}
         value={senha}
         label="Password"
+        mode='outlined'
         onChangeText={(event) => setSenha(event)}
         secureTextEntry
       />
       <TextInput style={styles.input}
         value={senhaConfirma}
         label="Password"
+        mode='outlined'
         onChangeText={(event) => setSenhaConfirma(event)}
         secureTextEntry
       />
