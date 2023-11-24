@@ -1,8 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
+import * as Location from 'expo-location';
 
 
 export default function CadastrarProduto({navigation}){
@@ -20,10 +21,16 @@ export default function CadastrarProduto({navigation}){
       {label: 'Tenis', value: '2'}
     ]);
 
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [lat,setLat] = useState(null);
+    const [long,setLong]= useState(null);
+  
+
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc,usuario:3 };
+          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc,prodLat: lat,prodLong:long, usuario:3 };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
           fetch('https://switch-app.glitch.me//produto', {
@@ -37,11 +44,34 @@ export default function CadastrarProduto({navigation}){
             .then((response) => response.json())
             .then((json) => {
               console.log('registrado');
+              navigation.navigate("Lista Produto");
             })
             .catch((err) => {
               console.log(err);
             });
 
+    }
+
+    useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+  
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        setLong(location.coords.longitude);
+        setLat(location.coords.latitude);
+      })();
+    }, []);
+  
+
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (location) {
+      console.log('loc certo') 
     }
 
     return(
@@ -72,6 +102,7 @@ export default function CadastrarProduto({navigation}){
 
       {/* <DropDownPicker style={styles.input}
           open={open}
+          placeholder="Selecione a categoria"
           value={value}
           items={categ}
           setOpen={setOpen}
