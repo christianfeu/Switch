@@ -82,6 +82,8 @@ export default function CadastrarProduto({navigation}){
       <TextInput style={styles.input}
           label="Nome"
           value={nome}
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           mode='outlined'
           onChangeText={(event) => setNome(event)}
       />
@@ -89,6 +91,8 @@ export default function CadastrarProduto({navigation}){
       <TextInput style={styles.input}
           label="Preço"
           value={preco}
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           mode='outlined'
           onChangeText={(event) => setPreco(event)}
       />
@@ -96,6 +100,8 @@ export default function CadastrarProduto({navigation}){
       <TextInput style={styles.input}
           label="Descrição"
           value={desc}
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           mode='outlined'
           onChangeText={(event) => setDesc(event)}
       />
@@ -111,7 +117,11 @@ export default function CadastrarProduto({navigation}){
       /> */}
 
       
-      <Button mode="contained" onPress={Registrar} style={styles.button}>
+      <Button 
+      mode="contained" 
+      theme={{ colors: { primary: "#5DB075" } }}
+      outlineColor='#5DB075'
+      onPress={Registrar} style={styles.button}>
         Cadastrar
       </Button>
    

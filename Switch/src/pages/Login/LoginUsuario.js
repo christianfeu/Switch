@@ -46,14 +46,16 @@ export default function LoginUsuario({navigation}){
           <TextInput style={styles.input}
           label="Email"
           mode='outlined'
-          selectionColor='red'
-          underlineColor='red'
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           value={email}
           onChangeText={email => setEmail(email)}
           />
 
           <TextInput style={styles.input}
           label="Senha"
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           mode='outlined'
           value={senha}
           onChangeText={senha => setSenha(senha)}
@@ -68,6 +70,8 @@ export default function LoginUsuario({navigation}){
 
           <TouchableOpacity >
             <Button 
+            theme={{ colors: { primary: "#5DB075" } }}
+            outlineColor='#5DB075'
             mode="contained" 
             onPress={logar}>
             Login
@@ -89,7 +93,7 @@ export default function LoginUsuario({navigation}){
 }
 
 const styles = StyleSheet.create({
-  
+
   forgotPassword: {
     width: '100%',
     alignItems: 'center',

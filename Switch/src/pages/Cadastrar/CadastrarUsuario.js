@@ -44,6 +44,8 @@ export default function CadastrarUsuario({navigation}){
 
       <TextInput style={styles.input}
           label="Nome"
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
           value={nome}
           mode='outlined'
           onChangeText={(event) => setNome(event)}
@@ -52,6 +54,8 @@ export default function CadastrarUsuario({navigation}){
       <TextInput style={styles.input}
         label="Email"
         value={email}
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         mode='outlined'
         onChangeText={(event) => setEmail(event)}
         autoCapitalize="none"
@@ -63,17 +67,25 @@ export default function CadastrarUsuario({navigation}){
       <TextInput style={styles.input}
         label="Password"
         mode='outlined'
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         onChangeText={(event) => setSenha(event)}
         secureTextEntry
       />
       <TextInput style={styles.input}
         label="Password"
         mode='outlined'
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         onChangeText={(event) => setSenhaConfirma(event)}
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={Registrar} style={styles.button}>
+      <Button 
+      mode="contained" 
+      theme={{ colors: { primary: "#5DB075" } }}
+      outlineColor='#5DB075'
+      onPress={Registrar} style={styles.button}>
         Cadastrar
       </Button>
 

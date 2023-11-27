@@ -12,12 +12,12 @@ export default function Logo(){
 
 const styles = StyleSheet.create({
   image: {
-    width: 64,
-    height: 64,
+    width: 40,
+    height: 40,
   },
 
   font: {
-    fontSize: 36,
+    fontSize: 30,
     fontWeight: 'bold',
   },
 
