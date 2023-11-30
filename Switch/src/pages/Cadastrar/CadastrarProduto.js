@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { getId } from '../../components/Storage';
 import * as Location from 'expo-location';
 
 
@@ -11,7 +12,7 @@ export default function CadastrarProduto({navigation}){
     const [preco, setPreco] = useState('');
     const [desc, setDesc] = useState('');
     const [categoria, setCategoria] = useState('');
-    //const idUsuario=
+    const idUsuario= getId();
 
 
     const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function CadastrarProduto({navigation}){
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome: nome, prodPreco: preco, prodDesc: desc,prodLat: lat,prodLong:long, usuario:3 };
+          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat, prodLong:long, usuario:idUsuario };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
           fetch('https://switch-app.glitch.me//produto', {

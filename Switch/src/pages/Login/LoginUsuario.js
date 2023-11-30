@@ -2,6 +2,8 @@ import React from "react";
 import {useState} from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
+import { setToken } from "../../components/Storage";
+import { setId } from "../../components/Storage";
 import Logo from "../../components/Logo";
 
 export default function LoginUsuario({navigation}){
@@ -24,10 +26,19 @@ export default function LoginUsuario({navigation}){
 
         fetch("https://switch-app.glitch.me//login", requestOptions)
         .then(response => response.json())
-        .then(result => {
-          if(result.menssagem == "sucesso!"){
+        .then(data => {
+          const token = data.token;
+          const id = data.id;
+          if(token){
+            console.log(token);
+            console.log(id);
+            setToken(token);
+            setId(id);
             navigation.navigate("Menu");
+          }else{
+            
           }
+
 
         })
         .catch(error => console.log('error', error));
