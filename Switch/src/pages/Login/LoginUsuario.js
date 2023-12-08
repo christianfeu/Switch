@@ -34,7 +34,7 @@ export default function LoginUsuario({navigation}){
             console.log(id);
             setToken(token);
             setId(id);
-            navigation.navigate("Menu");
+            navigation.navigate("Home");
           }else{
             
           }
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    marginTop: 40,
+    paddingTop: 60,
     padding: 20,
   },
 

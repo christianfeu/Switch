@@ -5,9 +5,27 @@ import { TextInput,Button } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { getId } from '../../components/Storage';
 import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 
 
 export default function CadastrarProduto({navigation}){
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      console.log(result);
+
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    };
+
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState('');
     const [desc, setDesc] = useState('');
@@ -31,7 +49,7 @@ export default function CadastrarProduto({navigation}){
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat, prodLong:long, usuario:idUsuario };
+          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat,prodFoto:image, prodLong:long, usuario:idUsuario };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
           fetch('https://switch-app.glitch.me//produto', {
@@ -79,6 +97,15 @@ export default function CadastrarProduto({navigation}){
     <View style={styles.container}>
 
       <Text style={styles.header}>Cadastrar Produto</Text>
+
+      <Button icon="camera" mode="outlined" onPress={pickImage} theme={{ colors: { primary: "#5DB075" } }}
+      outlineColor='#5DB075'>
+        Escolha a imagem
+      </Button>
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+      
+
+      
 
       <TextInput style={styles.input}
           label="Nome"

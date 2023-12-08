@@ -25,10 +25,11 @@ export default function App() {
           headerShown: false,
         }}
         component={LoginUsuario} /> 
+
         <Stack.Screen 
         name="Home" 
         options={{
-          headerLeft: null,
+          headerBackTitle:'perfil',
           headerRightContainerStyle: {
             marginRight: 10,
           },
@@ -41,6 +42,7 @@ export default function App() {
           title: 'Switch'
         }}
         component={Home}/>
+        
         <Stack.Screen name="Registrar" component={CadastrarUsuario} />
         <Stack.Screen name="Menu" component={TelaMenu} />
         <Stack.Screen name="Editar" component={TelaEditar} /> 
