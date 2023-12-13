@@ -5,7 +5,7 @@ import { Avatar, Card, IconButton,Button, } from 'react-native-paper';
 import { getId } from '../components/Storage';
 
 
-export function TelaListaProduto({navigation}) {
+export function TelaListaProduto2({navigation}) {
   const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
  

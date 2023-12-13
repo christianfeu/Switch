@@ -1,37 +1,34 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity,Platform, StyleSheet, Text, View,Image } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { getId } from '../../components/Storage';
+import { getId,getToken } from '../../components/Storage';
 import * as Location from 'expo-location';
-import * as ImagePicker from 'expo-image-picker';
-
+import ImgurUpload from '../../components/ImgurUpload';
 
 export default function CadastrarProduto({navigation}){
-    const [image, setImage] = useState(null);
-
-    const pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      console.log(result);
-
-      if (!result.canceled) {
-        setImage(result.assets[0].uri);
-      }
-    };
-
+    
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState('');
     const [desc, setDesc] = useState('');
     const [categoria, setCategoria] = useState('');
-    const idUsuario= getId();
 
+    const useUsuario = async () => {
+      try {
+        const resultado = await getId();
+        setUsuario(resultado);
+      } catch (error) {
+        console.error('Erro ao obter o ID:', error.message);
+        // Trate o erro, se necessário
+      }
+    };
+
+    const [usuario, setUsuario] = useState(null);
+    useEffect(() => {
+      // Chama a função assíncrona
+      useUsuario();
+    }, []);
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
@@ -49,9 +46,10 @@ export default function CadastrarProduto({navigation}){
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat,prodFoto:image, prodLong:long, usuario:idUsuario };
+          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat, prodLong:long, Usuario_idUsuario: usuario  };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
+          console.log(usuario);
           fetch('https://switch-app.glitch.me//produto', {
             method: 'POST',
             headers: {
@@ -63,7 +61,7 @@ export default function CadastrarProduto({navigation}){
             .then((response) => response.json())
             .then((json) => {
               console.log('registrado');
-              navigation.navigate("Lista Produto");
+              navigation.navigate("Home");
             })
             .catch((err) => {
               console.log(err);
@@ -96,16 +94,7 @@ export default function CadastrarProduto({navigation}){
     return(
     <View style={styles.container}>
 
-      <Text style={styles.header}>Cadastrar Produto</Text>
-
-      <Button icon="camera" mode="outlined" onPress={pickImage} theme={{ colors: { primary: "#5DB075" } }}
-      outlineColor='#5DB075'>
-        Escolha a imagem
-      </Button>
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-      
-
-      
+      <ImgurUpload/>
 
       <TextInput style={styles.input}
           label="Nome"

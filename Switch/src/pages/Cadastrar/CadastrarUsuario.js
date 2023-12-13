@@ -40,8 +40,6 @@ export default function CadastrarUsuario({navigation}){
     return(
     <View style={styles.container}>
 
-      <Text style={styles.header}>Cadastrar</Text>
-
       <TextInput style={styles.input}
           label="Nome"
           theme={{ colors: { primary: "#5DB075" } }}
@@ -88,13 +86,7 @@ export default function CadastrarUsuario({navigation}){
       onPress={Registrar} style={styles.button}>
         Cadastrar
       </Button>
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Ja tem conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>    
+   
     </View>     
     );
  
@@ -112,8 +104,9 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     },
     container: {
+      backgroundColor: 'white',
       flex: 1,
-      marginTop: 40,
+      paddingTop: 60,
       padding: 20,
     },
     input: {

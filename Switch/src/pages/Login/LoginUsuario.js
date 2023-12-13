@@ -34,7 +34,7 @@ export default function LoginUsuario({navigation}){
             console.log(id);
             setToken(token);
             setId(id);
-            navigation.navigate("Home");
+            navigation.navigate("Menu");
           }else{
             
           }
