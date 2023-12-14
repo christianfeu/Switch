@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
+import { setLink } from './Storage';
 
 const ImgurUpload = () => {
   const [imageURI, setImageURI] = useState(null);
@@ -32,12 +33,7 @@ const ImgurUpload = () => {
     }
   };
 
-  const image = require("../../assets/logo.png")
-
   const uploadToImgur = async (imageUri) => {
-    const filename = imageUri.uri.split('/').pop();
-    const filetype = filename.split('.').pop();
-    console.log(filename,filetype);
     console.log(imageUri);
     
     var formdata = new FormData();
@@ -54,13 +50,18 @@ const ImgurUpload = () => {
 
     fetch("https://api.imgur.com/3/image", requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result);
+        const link = JSON.parse(result);
+        console.log(link.data.link);
+        setLink(link.data.link);
+      })
       .catch(error => console.log('error', error));
   };
 
   return (
-    <View>
-      {imageURI && <Image source={{ uri: imageURI }} style={{ width: 200, height: 200 }} />}
+    <View style={{ alignItems: 'center' }}>
+      {imageURI  && <Image source={{ uri: imageURI.uri }} style={{ width: 200, height: 200 }} />}
       <Button icon="camera" mode="text" onPress={pickImage} theme={{ colors: { primary: "#5DB075" } }}
       outlineColor='#5DB075'>
         Escolha a imagem

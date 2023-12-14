@@ -8,6 +8,7 @@ import Propostas from '../pages/Propostas/Propostas';
 import { TelaListaProduto } from '../pages/TelaListaProduto';
 import CadastrarProduto from '../pages/Cadastrar/CadastrarProduto';
 import { TelaLista } from '../pages/TelaLista';
+import TelaEditar from '../pages/TelaEditar';
 
 const Tab = createBottomTabNavigator();
 
@@ -137,7 +138,7 @@ export default function TabRoutes() {
         />
         
         <Tab.Screen 
-            name="Perfil" component={TelaLista} options={{
+            name="Perfil" component={Perfil} options={{
               tabBarIcon: ({focused})=>(
                 <View style={{alignItems:'center', justifyContent: 'center', top:2.2}} >
                   <FontAwesome5 name="user-alt" size={24} color={focused ? '#5DB075' : 'gray'} />

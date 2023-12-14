@@ -21,4 +21,15 @@ export const getToken = async () => {
 export const getId = async () => {
     const idUsuario = await AsyncStorage.getItem('idUsuario');
     return idUsuario;
-  };
+};
+
+export const setLink = async (Link) => {
+    await AsyncStorage.setItem('userLink', Link);
+};
+
+export const getLink = async () => {
+    const userLink = await AsyncStorage.getItem('userLink');
+    return userLink;
+};
+
+

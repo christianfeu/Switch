@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 import { TouchableOpacity,Platform, StyleSheet, Text, View,Image } from 'react-native';
 import { TextInput,Button } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { getId,getToken } from '../../components/Storage';
+import { getId } from '../../components/Storage';
 import * as Location from 'expo-location';
 import ImgurUpload from '../../components/ImgurUpload';
+import { getLink } from '../../components/Storage';
 
 export default function CadastrarProduto({navigation}){
     
@@ -28,6 +29,20 @@ export default function CadastrarProduto({navigation}){
       useUsuario();
     }, []);
 
+    const useLink = async () => {
+      try {
+        const resultado = await getLink();
+        setLink(resultado);
+      } catch (error) {
+        console.error('Erro ao obter o link:', error.message);
+      }
+    };
+
+    const [linkImg, setLink] = useState(null);
+    useEffect(() => {
+      useLink();
+    }, []);
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [categ, setCateg] = useState([
@@ -44,7 +59,7 @@ export default function CadastrarProduto({navigation}){
     function Registrar() {
     
           console.log('Ok');
-          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat, prodLong:long, Usuario_idUsuario: usuario  };
+          var userObj = { prodNome:nome, prodPreco:preco, prodDesc:desc, prodLat:lat,prodFoto:linkImg, prodLong:long, Usuario_idUsuario: usuario  };
           var jsonBody = JSON.stringify(userObj);
           console.log(jsonBody);
           console.log(usuario);
@@ -153,6 +168,7 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
+      flexDirection: 'column',
       marginTop: 40,
       padding: 20,
     },

@@ -64,18 +64,21 @@ export default function TelaEditar({navigation,route}){
     return(
       <View style={styles.container}>
 
-      <Text style={styles.header}>Editar</Text>
 
       <TextInput style={styles.input}
           label="Nome"
-          value={nome}
           mode='outlined'
+          theme={{ colors: { primary: "#5DB075" } }}
+          outlineColor='#5DB075'
+          value={nome}
           onChangeText={(event) => setNome(event)}
       />
 
       <TextInput style={styles.input}
         label="Email"
         value={email}
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         mode='outlined'
         onChangeText={(event) => setEmail(event)}
         autoCapitalize="none"
@@ -88,6 +91,8 @@ export default function TelaEditar({navigation,route}){
         value={senha}
         label="Password"
         mode='outlined'
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         onChangeText={(event) => setSenha(event)}
         secureTextEntry
       />
@@ -95,11 +100,16 @@ export default function TelaEditar({navigation,route}){
         value={senhaConfirma}
         label="Password"
         mode='outlined'
+        theme={{ colors: { primary: "#5DB075" } }}
+        outlineColor='#5DB075'
         onChangeText={(event) => setSenhaConfirma(event)}
         secureTextEntry
       />
 
-      <Button mode="contained" onPress={Registrar} style={styles.button}>
+      <Button mode="contained"
+      theme={{ colors: { primary: "#5DB075" } }}
+      outlineColor='#5DB075'
+       onPress={Registrar} style={styles.button}>
         Editar
       </Button>
     </View>

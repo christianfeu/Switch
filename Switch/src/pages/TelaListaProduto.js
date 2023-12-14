@@ -45,23 +45,15 @@ export function TelaListaProduto({navigation}) {
       .catch(error => console.log('error', error));
   }
 
-  const confirmar = () => {
-    return Alert.alert(
-      "Confirmar",
-      "Deseja Excluir?",
-      [
-        {
-          text: "Sim",
-          onPress: () => {
-            deletar(item.idUsuario);
-          },
-        },
-        {
-          text: "Não",
-        },
-      ]
-    );
-  };
+  const confirmar = () =>
+    Alert.alert('Confirmar', 'Deseja Excluir?', [
+      {
+        text: 'Cancelar',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => deletar(item.idProduto)},
+    ]);
 
   const useUsuario = async () => {
     try {
@@ -83,13 +75,14 @@ export function TelaListaProduto({navigation}) {
     if (prod.Usuario_idUsuario === usuario) {
       return (
         <View style={[styles.listItem, styles.shadowProp]}>
-          <Card.Title
+          <Card.Title style={{ maxWidth:274}}
             title={prod.prodNome}
+            titleNumberOfLines={2}
             elevation={5}
             subtitle={"R$" + prod.prodPreco}
             left={(props) => <Avatar.Image size={47} source={{ uri: prod.prodFoto }} />}
           />
-          <IconButton style={styles.icon} icon="dots-vertical" onPress={() => confirmar()} />
+          <IconButton style={styles.icon} icon="trash-can-outline" onPress={() => deletar(prod.idProduto)} />
         </View>
       );
     } else {
@@ -138,9 +131,10 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#FFF",
     width: "80%",
+    marginHorizontal: 20,
     flex: 1,
-    justifyContent:'space-between',
     alignSelf: "center",
+    justifyContent:'center',
     flexDirection: "row",
     borderRadius: 10
   },

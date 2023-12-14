@@ -53,11 +53,11 @@ const MandarProposta = ({ show, close }) => {
       >
         <View style={styles.indicator} />
         
-        <TelaListaProduto2/>
-
         <TouchableOpacity style={styles.btn} onPress={close}>
           <Text style={{ color: '#fff' }}>Mandar Proposta</Text>
         </TouchableOpacity>
+        
+
       </Animated.View>
     </Animated.View>
   )
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   btn: {
-    width: '50%',
+    marginVertical:10,
     height: 50,
     borderRadius: 15,
     backgroundColor: '#5DB075',

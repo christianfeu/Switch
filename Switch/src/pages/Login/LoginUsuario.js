@@ -69,6 +69,7 @@ export default function LoginUsuario({navigation}){
           outlineColor='#5DB075'
           mode='outlined'
           value={senha}
+          secureTextEntry
           onChangeText={senha => setSenha(senha)}
           />
 
