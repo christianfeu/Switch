@@ -21,25 +21,33 @@ const ImgurUpload = () => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
+      base64: true,
       quality: 1,
     });
 
     if (!result.cancelled) {
-      setImageURI(result.uri);
-      uploadToImgur(result.uri);
+      console.log(result);
+      setImageURI(result);
+      uploadToImgur(result);
     }
   };
 
-  const uploadToImgur = async (imageUri) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer 795593ae7edc6aa9527579fa5aebe8be880bc952");
+  const image = require("../../assets/logo.png")
 
+  const uploadToImgur = async (imageUri) => {
+    const filename = imageUri.uri.split('/').pop();
+    const filetype = filename.split('.').pop();
+    console.log(filename,filetype);
+    console.log(imageUri);
+    
     var formdata = new FormData();
-    formdata.append("image", imageUri);
+    formdata.append("image", imageUri.assets[0].base64)
 
     var requestOptions = {
       method: 'POST',
-      headers: myHeaders,
+      headers:{
+        "Authorization": "Client-ID e37bed5c57fc159"
+      },
       body: formdata,
       redirect: 'follow'
     };

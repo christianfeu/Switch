@@ -20,13 +20,11 @@ export default function CadastrarProduto({navigation}){
         setUsuario(resultado);
       } catch (error) {
         console.error('Erro ao obter o ID:', error.message);
-        // Trate o erro, se necessário
       }
     };
 
     const [usuario, setUsuario] = useState(null);
     useEffect(() => {
-      // Chama a função assíncrona
       useUsuario();
     }, []);
 
@@ -85,11 +83,6 @@ export default function CadastrarProduto({navigation}){
     }, []);
   
 
-    if (errorMsg) {
-      text = errorMsg;
-    } else if (location) {
-      console.log('loc certo') 
-    }
 
     return(
     <View style={styles.container}>

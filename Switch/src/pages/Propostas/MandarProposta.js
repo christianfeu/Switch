@@ -95,16 +95,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   btn: {
-    top:364,
-    left:100,
-    position: 'absolute',
     width: '50%',
     height: 50,
     borderRadius: 15,
     backgroundColor: '#5DB075',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 30
   }
 })
 
